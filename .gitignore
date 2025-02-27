@@ -1,0 +1,14 @@
+# modules
+node_modules
+
+# lock files
+*lock*
+
+# output
+dist
+
+# env
+.env.*
+
+# misc
+.DS_Store

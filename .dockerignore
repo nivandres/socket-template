@@ -1,0 +1,10 @@
+# modules
+node_modules
+
+# lock files
+*.lock*
+
+# misc
+.*rc
+eslint*
+README.md

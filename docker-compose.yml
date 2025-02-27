@@ -1,0 +1,21 @@
+name: socket-app
+services:
+  socket:
+    container_name: socket-server
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+      - ADAPTER=redis
+      - ADAPTER_URL=redis://redis:6379
+    command: ["bun", "run", "dev"]
+    depends_on:
+      - redis
+  redis:
+    container_name: socket-adapter
+    image: redis:latest
+    ports:
+      - "6379:6379"

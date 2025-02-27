@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.IO Test</title>
+    <link rel="icon" href="https://socket.io/images/favicon.png" type="image/png" />
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+  </head>
+  <body>
+    <h1>Socket.IO Test</h1>
+    <div>
+      <span id="statusIndicator" style="color: red">Disconnected</span>
+      <button id="connectButton">Connect</button>
+      <button id="disconnectButton">Disconnect</button>
+      <button id="clearButton">Clear Messages</button>
+    </div>
+    <ul id="messages"></ul>
+    <form id="sendForm">
+      <input type="text" id="messageInput" placeholder="Type a message" />
+      <button id="sendButton" type="submit">Send</button>
+    </form>
+    <script>
+      let socket_url = "";
+      if (!socket_url)
+        socket_url = prompt("Enter socket url. Example: http://localhost:3000") || "http://localhost:3000";
+      const socket = io(socket_url);
+      const statusIndicator = document.getElementById("statusIndicator");
+      socket.on("connect", () => {
+        console.log(`Connected with id: ${socket.id}`);
+        statusIndicator.textContent = "Connected";
+        statusIndicator.style.color = "green";
+      });
+      socket.on("message", message => {
+        const messages = document.getElementById("messages");
+        const messageElement = document.createElement("li");
+        messageElement.textContent = message;
+        messages.appendChild(messageElement);
+      });
+      socket.on("disconnect", reason => {
+        console.log(`Disconnected: ${reason}`);
+        statusIndicator.textContent = "Disconnected";
+        statusIndicator.style.color = "red";
+      });
+      document.getElementById("sendForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const messageInput = document.getElementById("messageInput");
+        const message = messageInput.value;
+        socket.emit("message", message);
+        messageInput.value = "";
+      });
+      document.getElementById("connectButton").addEventListener("click", () => {
+        if (socket.disconnected) {
+          socket.connect();
+        }
+      });
+      document.getElementById("disconnectButton").addEventListener("click", () => {
+        if (socket.connected) {
+          socket.disconnect();
+        }
+      });
+      document.getElementById("clearButton").addEventListener("click", () => {
+        const messages = document.getElementById("messages");
+        messages.innerHTML = "";
+      });
+    </script>
+  </body>
+</html>
