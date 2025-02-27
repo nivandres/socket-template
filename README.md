@@ -67,7 +67,7 @@ This will start the server and Redis containers, and expose the server on port 3
 
 You can access the server at `http://localhost:3000`.
 
-Test the server [here](https://nivandres.github.io/socket-template/) introducing your localhost url.
+Test the server [here](https://nivandres.github.io/socket-template/public) introducing your localhost url.
 
 ### Production Deployment
 
