@@ -1,5 +1,6 @@
 {
   "name": "socket-template",
+  "description": "Distributed Socket.IO Server Template",
   "module": "index.ts",
   "type": "module",
   "scripts": {
