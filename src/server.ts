@@ -3,7 +3,7 @@ import { Server } from "socket.io";
 import { adapter } from "./adapter";
 import { handleServer } from "./io";
 
-let io: Server;
+export let io: Server;
 
 export const config = { adapter, cors };
 
@@ -12,5 +12,3 @@ export function createServer() {
   handleServer(io);
   return io;
 }
-
-export { io };
