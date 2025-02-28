@@ -60,7 +60,7 @@ ADAPTER_URL=redis://localhost:6379
 To deploy the server locally, you can use Docker Compose:
 
 ```sh
-docker-compose up -d
+PORT=3000 docker-compose up -d
 ```
 
 This will start the server and Redis containers, and expose the server on port 3000.
