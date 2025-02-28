@@ -24,7 +24,7 @@
       let socket_url = "";
       if (!socket_url)
         socket_url = prompt("Enter socket url. Example: http://localhost:3000") || "http://localhost:3000";
-      const socket = io(socket_url);
+      const socket = io(socket_url, { transports: ["websocket"] });
       const statusIndicator = document.getElementById("statusIndicator");
       socket.on("connect", () => {
         console.log(`Connected with id: ${socket.id}`);
